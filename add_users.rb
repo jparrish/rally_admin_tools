@@ -16,16 +16,16 @@ EDITOR = 'Editor'
 VIEWER = 'Viewer'
 NOACCESS = 'No Access'
 
-# Field delimiter for find_user definition file
+# Field delimiter for user definition file
 DELIM = ','
 
 $logger = nil
 
-# The format of the find_user definition file is:
+# The format of the user definition file is:
 # Header - ID sep FirstName sep LastName sep Workspace
 # User1  - baz sep foo sep bar sep sandbox
 # User2  - ......
-# The ID field is used to construct the email address and rally find_user id
+# The ID field is used to construct the email address and rally user id
 #TODO Downcase id to ensure a match if preexisting
 def read_definitions
   definitions = []
@@ -46,7 +46,7 @@ end
 def create_user(definition)
   new_user = nil
 
-  #First make sure the find_user doesn't already have an account
+  #First make sure the user doesn't already have an account
   #TODO allow id to be in the form of an email address, in addition to just the prefix
   user_name = definition[:id].downcase + '@' + MyConfig::domain
   users = Users.instance
@@ -91,7 +91,8 @@ def add_project_permission(user, project, permission, workspace)
     create_project_permission(user, project, permission, workspace)
     # You can't (unfortunately) just append a new permission to the existing ones
     #user.UserPermissions << create_project_permission(user, project, permission, workspace)
-    $logger.debug "  #{user.UserName} #{project.Name} - Permission set to #{permission}"
+    $logger.debug "  #{#noinspection RubyResolve
+    user.UserName} #{project.Name} - Permission set to #{permission}"
   else
     $logger.error "Invalid Permission - #{permission}"
   end
@@ -105,7 +106,8 @@ def update_permissions(user, definition)
   workspace.projects.each do |project|
     add_project_permission(user, project, EDITOR, workspace)
   end
-  $logger.info "\tUpdated #{user.UserName}\'s permissions in #{Time.new - start} sec."
+  $logger.info "\tUpdated #{#noinspection RubyResolve
+  user.UserName}\'s permissions in #{Time.new - start} sec."
 end
 
 def create_connection
@@ -139,7 +141,7 @@ begin
   #Configure the cache
   RallyCache.configure({connection: @rally, logger: $logger})
 
-  #Create an account for each find_user in the definition file
+  #Create an account for each user in the definition file
   #and assign editor permissions to all projects in the specified workspace
   definitions = read_definitions
   count = definitions.length

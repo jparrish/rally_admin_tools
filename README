@@ -1,1 +1,37 @@
-This file was created by JetBrains RubyMine 5.0 for binding GitHub repository
+rally_admin_tools
+=====================
+
+The rally_admin_tools kit is a small, simple collection of tools for Rally subscription administrators who need to bulk
+create users in their Rally subscription, and provides an easy way to summarize workspaces, projects, and users and their
+permissions. All the good ideas for these tools came from:
+Rally-User-Management   https://github.com/markwilliams970/Rally-User-Management
+
+rally_admin_tools is similar to Rally-User-Management in the ways listed below:
+
+- Uses the rally_api gem instead of rally_rest_api
+- rally_api greatly improves speed and reliability.
+
+rally_admin_tools differs from Rally-User-Management in that it is intended to handle the very specific case of bulk
+creating users within a workspace, with EDITOR permissions for every project in that workspace. Other than the
+user_definition.csv file, no other intermediate files are generated or required.
+
+rally_admin_tools requires:
+- Ruby 1.9.3
+- rally_api 0.9.1 or higher
+- You can install rally_api and dependent gems by using:
+- gem install rally_api
+
+The contents of this Github repository include:
+
+- my_config_template.rb                         - User configurable variables. Copy to my_config.rb and modify
+- user_definitions_template.csv                 - This is the list of users/attributes you want to create
+                                                - Copy to user_definitions.csv and modify
+- add_users.rb                                  - Tool to bulk create users based on users described in
+                                                - user_definitions.csv
+- rally_cache.rb                                - In-memory cache of Rally workspaces, projects, users and their
+                                                - permissions.
+- summary.rb                                    - Tool to output summary of workspaces, projects, and all users and
+                                                - their permissions
+- README                                        - This README
+
+Please clone the repo and save to a folder on your local drive.
