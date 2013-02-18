@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    httpclient (2.3.2)
+    rally_api (0.9.1)
+      httpclient (>= 2.2.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rally_api
